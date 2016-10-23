@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<link rel="stylesheet" href="normalize.css">
+	<link rel="stylesheet" href="style.css">
+	<title>Home Page</title>
+</head>
+<body>
+	<header>
+		<div class="logo">
+			<svg version="1.1" id="logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 342.298 342.298" style="enable-background:new 0 0 342.298 342.298;" xml:space="preserve">
+				<g>
+					<rect id="white" style="fill:#AA3939;" width="171.149" height="171.149"/>
+					<rect id="blue" x="171.149" style="fill:#AA6C39;" width="171.149" height="171.149"/>
+					<rect id="black" y="171.149" width="171.149" height="171.149" style="fill:#2D882D;"/>
+					<rect id="grey" x="171.149" y="171.149" style="fill:#226666;" width="171.149" height="171.149"/>
+				</g>
+			</svg>
+		</div>
+		<h1>Home page</h1>
+	</header>
+	<div class="wrapper">
+		<aside>
+			<nav>
+				<h2><svg version="1.1" id="menu" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 405.333 405.333" style="enable-background:new 0 0 405.333 405.333;" xml:space="preserve">
+					<g><g><rect x="85.333" y="53.333" width="256" height="42.667"/></g></g>
+					<g><g><rect y="53.333" width="42.667" height="42.667"/></g></g>
+					<g><g><rect y="138.667" width="42.667" height="42.667"/></g></g>
+					<g><g><rect y="224" width="42.667" height="42.667"/></g></g>
+					<g><g><rect y="309.333" width="42.667" height="42.667"/></g></g>
+					<g><g><rect x="85.333" y="309.333" width="320" height="42.667"/></g></g>
+					<g><g><rect x="85.333" y="138.667" width="320" height="42.667"/></g></g>
+					<g><g><rect x="85.333" y="224" width="277.333" height="42.667"/></g></g>
+				</svg>
+				Menu</h2>
+				<ul>
+					<li><a href="#">Home</a></li>
+					<li><a href="#">Users</a></li>
+					<li><a href="#">Reservations</a></li>
+				</ul>
+			</nav>
+		</aside>
+		<main>
+			<h2>Главный блок</h2>
+			<p>Описание главного блока</p>
+			<button id="login">Логин</button>
+			<button id="reserv">Резерв</button>
+		</main>
+		<div class="popup login-popup">
+			<div class="popup-inner">
+			<div class="buttonClose buttonClose-login ">X</div>
+				<form action="login">
+					<div class="inputLabel"><div class="ToolLoginLogin">Логин - от 5 до 20 символов латиницей</div><input type="text" id="loginInput" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{4,20}$" required><label for="loginInput">Введите логин</label></div>
+					<div class="inputLabel"><div class="ToolLoginPass">Пароль - большие и маленькие латинские буквы, минимум 8, максимум 25</div><input type="password" id="PassInput" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" maxlength="25" required><label for="PassInput">Введите пароль</label></div>
+					<input type="submit" value="Отправить" onclick="validateLogin();" >
+				</form>
+			</div>
+		</div>
+		<div class="popup reserv-popup">
+			<div class="popup-inner">
+			<div class="buttonClose buttonClose-reserv ">X</div>
+				<form action="reserv" enctype="multipart/form-data" method="post">
+					<div class="inputLabel"><input type="text" id="nameInput" pattern="^[а-яА-ЯёЁa-zA-Z0-9]+$" required><label for="nameInput">Ваше имя</label></div>
+					<div class="inputLabel"><input type="text" id="SurnameInput" pattern="^[а-яА-ЯёЁa-zA-Z0-9]+$" required><label for="SurnameInput">Ваша фамилия</label></div>
+					<input type="file" multiple accept="application/pdf, application/excel, application/x-msexcel,application/vnd.ms-excel, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+					<input type="submit" value="Отправить" >
+				</form>
+			</div>
+		</div> 
+	</div>
+	<footer>Copyright</footer>
+	<script>
+		var buutonLogin = document.getElementById('login');
+		buutonLogin.addEventListener("click", function(){
+			var loginPopup = document.querySelector('.login-popup');
+			loginPopup.style.display="block";
+		});
+		var buutonReserv = document.getElementById('reserv');
+		buutonReserv.addEventListener("click", function(){
+			var reservPopup = document.querySelector('.reserv-popup');
+			reservPopup.style.display="block";
+		}); 
+		var buutonCloseLogin = document.querySelector('.buttonClose-login');
+		buutonCloseLogin.addEventListener("click", function(){
+			var loginPopup = document.querySelector('.login-popup');
+			loginPopup.style.display="none";
+		}); 
+		var buutonCloseReserv = document.querySelector('.buttonClose-reserv');
+		buutonCloseReserv.addEventListener("click", function(){
+			var reservPopup = document.querySelector('.reserv-popup');
+			reservPopup.style.display="none";;
+		}); 
+		var inputLogin =document.getElementById('loginInput');
+		inputLogin.onblur = function(){
+			var newinput =document.getElementById('loginInput').value;
+			if(newinput.length>0){
+				var label = document.querySelector('label[for="loginInput"]');
+				label.style.fontSize="1em";
+				label.style.top="0";
+				label.style.textDecoration="underline";
+			}
+			else{
+				var label = document.querySelector('label[for="loginInput"]');
+				label.style.fontSize="2em";
+				label.style.top="7px";
+				label.style.textDecoration="none";
+			}
+		};
+
+		var inputPass =document.getElementById('PassInput');
+		inputPass.onblur = function(){
+			var newinput =document.getElementById('PassInput').value;
+			if(newinput.length>0){
+				var label = document.querySelector('label[for="PassInput"]');
+				label.style.fontSize="1em";
+				label.style.top="0";
+				label.style.textDecoration="underline";
+			}
+			else{
+				var label = document.querySelector('label[for="PassInput"]');
+				label.style.fontSize="2em";
+				label.style.top="7px";
+				label.style.textDecoration="none";
+			}
+		};
+
+
+		function validateLogin() {
+			var inputLoginText =document.getElementById('loginInput').value;
+			if((inputLoginText.length < 5)||(inputLoginText.length > 20)){
+				var tooltip = document.querySelector('.ToolLoginLogin');
+					tooltip.style.display="block";
+					setTimeout(function(){
+						var tooltip = document.querySelector('.ToolLoginLogin');
+						tooltip.style.display="none";
+					}, 3000);
+			}
+			var inputPassText =document.getElementById('PassInput').value;
+			if((inputPassText.length < 8)||(inputPassText.length > 25)){
+				var tooltip = document.querySelector('.ToolLoginPass');
+					tooltip.style.display="block";
+					setTimeout(function(){
+						var tooltip = document.querySelector('.ToolLoginPass');
+						tooltip.style.display="none";
+					}, 3000);
+			}
+		}
+
+		var nameI =document.getElementById('nameInput');
+		nameI.onblur = function(){
+			var newinput =document.getElementById('nameInput').value;
+			if(newinput.length>0){
+				var label = document.querySelector('label[for="nameInput"]');
+				label.style.fontSize="1em";
+				label.style.top="0";
+				label.style.textDecoration="underline";
+			}
+			else{
+				var label = document.querySelector('label[for="nameInput"]');
+				label.style.fontSize="2em";
+				label.style.top="7px";
+				label.style.textDecoration="none";
+			}
+		};
+
+		var SurnameI =document.getElementById('SurnameInput');
+		SurnameI.onblur = function(){
+			var newinput =document.getElementById('SurnameInput').value;
+			if(newinput.length>0){
+				var label = document.querySelector('label[for="SurnameInput"]');
+				label.style.fontSize="1em";
+				label.style.top="0";
+				label.style.textDecoration="underline";
+			}
+			else{
+				var label = document.querySelector('label[for="SurnameInput"]');
+				label.style.fontSize="2em";
+				label.style.top="7px";
+				label.style.textDecoration="none";
+			}
+		};
+
+		
+	</script>
+</body>
+</html>
